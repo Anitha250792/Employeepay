@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sign Up - Payroll</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet"/>
 </head>
 <body>
   <div class="container">
@@ -16,25 +16,50 @@
     </div>
     <div class="form-section">
       <h2>Sign Up</h2>
-      <!-- HTML -->
-<div class="input-wrapper">
-  <img src="images/mail.png" alt="Mail Icon" />
-  <input type="text" id="loginName" placeholder="Enter your Name" />
-</div>
-
-      
+      <div class="input-wrapper">
+        <img src="images/mail.png" alt="Mail Icon" />
+        <input type="text" id="signupName" placeholder="Enter your Name" />
+      </div>
       <div class="password-wrapper">
-  <img src="images/Password.png" class="icon-left" alt="Password Icon" />
-  <input type="password" id="loginPassword" placeholder="Password" />
-  <span class="toggle" onclick="toggleVisibility('loginPassword')">
-    <img src="images/hide.png" alt="Toggle Password" />
-  </span>
-</div>
+        <img src="images/Password.png" class="icon-left" alt="Password Icon" />
+        <input type="password" id="signupPassword" placeholder="Password" />
+        <span class="toggle" onclick="toggleVisibility('signupPassword')">
+          <img src="images/hide.png" alt="Toggle Password" />
+        </span>
+      </div>
       <button onclick="registerUser()">Sign Up</button>
       <p>Already have an account? <a href="login.html">Login</a></p>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    function toggleVisibility(id) {
+      const input = document.getElementById(id);
+      input.type = input.type === "password" ? "text" : "password";
+    }
+
+    function registerUser() {
+      const name = document.getElementById("signupName").value.trim();
+      const password = document.getElementById("signupPassword").value.trim();
+
+      if (!name || !password) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+
+      const exists = users.find(u => u.name === name);
+      if (exists) {
+        alert("User already exists. Please login.");
+        return;
+      }
+
+      users.push({ name, password });
+      localStorage.setItem("users", JSON.stringify(users));
+      alert("Registration successful!");
+      window.location.href = "login.html";
+    }
+  </script>
 </body>
 </html>
