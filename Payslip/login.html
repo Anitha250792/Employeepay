@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login - Payroll</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet"/>
 </head>
 <body>
   <div class="container">
@@ -16,26 +16,50 @@
     </div>
     <div class="form-section">
       <h2>Login</h2>
-      <!-- HTML -->
-<div class="input-wrapper">
-  <img src="images/mail.png" alt="Mail Icon" />
-  <input type="text" id="loginName" placeholder="Enter your Name" />
-</div>
-
+      <div class="input-wrapper">
+        <img src="images/mail.png" alt="Mail Icon" />
+        <input type="text" id="loginName" placeholder="Enter your Name" />
+      </div>
       <div class="password-wrapper">
-  <img src="images/Password.png" class="icon-left" alt="Password Icon" />
-  <input type="password" id="loginPassword" placeholder="Password" />
-  <span class="toggle" onclick="toggleVisibility('loginPassword')">
-    <img src="images/hide.png" alt="Toggle Password" />
-  </span>
-</div>
-
+        <img src="images/Password.png" class="icon-left" alt="Password Icon" />
+        <input type="password" id="loginPassword" placeholder="Password" />
+        <span class="toggle" onclick="toggleVisibility('loginPassword')">
+          <img src="images/hide.png" alt="Toggle Password" />
+        </span>
+      </div>
       <p class="forgot">Forgot Password?</p>
       <button onclick="loginUser()">Login</button>
       <p>New user? <a href="signup.html">Sign Up</a></p>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    function toggleVisibility(id) {
+      const input = document.getElementById(id);
+      input.type = input.type === "password" ? "text" : "password";
+    }
+
+    function loginUser() {
+      const name = document.getElementById("loginName").value.trim();
+      const password = document.getElementById("loginPassword").value.trim();
+
+      if (!name || !password) {
+        alert("Please enter both username and password.");
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+
+      const validUser = users.find(u => u.name === name && u.password === password);
+      if (validUser) {
+        alert("Login successful!");
+        // You can store current user info if needed
+        localStorage.setItem("currentUser", JSON.stringify(validUser));
+        window.location.href = "overview.html"; // or your dashboard
+      } else {
+        alert("Invalid credentials. Please try again.");
+      }
+    }
+  </script>
 </body>
 </html>
