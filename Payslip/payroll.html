@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee's Payroll</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<style>
+     body {
+  display: flex;
+  margin: 0;
+  font-family: "Outfit", sans-serif;
+  background: #fffbe3;
+}
+
+body, html {
+  height: 100%;
+  background-color: #ffffff;
+}
+
+.sidebar {
+  background: #455A64;
+  color: white;
+  width: 220px;
+  padding: 30px 20px;
+}
+
+.sidebar h3 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.sidebar ul {
+  list-style: none;
+  font-size: 20px;
+  padding-left: 0;
+}
+
+.sidebar ul li {
+  padding: 15px 10px;
+  border-radius: 6px;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar ul li.active,
+.sidebar ul li:hover {
+  background-color: #546e7a;
+  color: #f8cc14;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 40px;
+  background-color: #fff;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.top-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.month-btn,
+.download-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+
+}
+
+.month-btn {
+  background-color: #37474f;
+  color: white;
+  width: 150px;
+}
+
+.download-btn {
+  background-color: #f4c301;
+  color: black;
+}
+
+.form-box {
+  background-color: #ffe082;
+  padding: 30px;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 15px;
+}
+
+.form-actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.submit-btn,
+.cancel-btn {
+  padding: 12px 20px;
+  border: none;
+  font-size: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 150px;
+}
+
+.submit-btn {
+  background-color: #f4c301;
+  color: black;
+}
+
+.cancel-btn {
+  background-color: #37474f;
+  color: white;
+}
+
+/* ✅ Media Queries */
+
+/* Tablet screens (width ≤ 768px) */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+  }
+
+  .sidebar ul {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    padding-left: 0;
+  }
+
+  .sidebar ul li {
+    margin: 0;
+    padding: 10px 15px;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+
+  .form-box {
+    padding: 20px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+/* Mobile screens (width ≤ 480px) */
+@media (max-width: 480px) {
+  .sidebar h3 {
+    font-size: 22px;
+  }
+
+  .sidebar ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sidebar ul li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .submit-btn,
+  .cancel-btn {
+    width: 100%;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .top-buttons {
+    justify-content: flex-start;
+  }
+}
+
+</style>
+<body>
+    
+  <aside class="sidebar">
+      
+      <ul>
+        <li><a href="overview.html"><img src="images/Overview.png"> Overview</a></li>
+        <li class="active"><a href="payroll.html"><img src="images/Payroll.png">  Payroll</a></li>
+        <li><a href="payslip.html"><img src="images/Payroll.png">  Payslip</a></li>
+      </ul>
+    </aside>
+
+  <main class="main-content">
+      <header>
+        <h2>Payroll Details</h2>
+        <div class="top-buttons">
+          <button class="month-btn"><span>📅</span> Month</button>
+          <a href="payslip.html"><button class="download-btn">Download</button></a>
+        </div>
+      </header>
+
+      <form id="payrollForm">
+        <div class="form-box">
+          <div class="form-grid">
+            <div class="field">
+              <label>Employee Name</label>
+              <input type="text" id="name" required>
+            </div>
+            <div class="field">
+              <label>Employee Role</label>
+              <input type="text" id="role" required>
+            </div>
+            <div class="field">
+              <label>Employee ID</label>
+              <input type="text" id="empid" required>
+            </div>
+            <div class="field">
+              <label>Date</label>
+              <input type="date" id="date" required>
+            </div>
+            <div class="field">
+              <label>Basic Salary</label>
+              <input type="number" id="basic" required>
+            </div>
+            <div class="field">
+              <label>Total Salary</label>
+              <input type="number" id="total" required>
+            </div>
+            <div class="field">
+              <label>No of Working Days</label>
+              <input type="number" id="working" required>
+            </div>
+            <div class="field">
+              <label>Total Present Days</label>
+              <input type="number" id="present" required>
+            </div>
+            <div class="field">
+              <label>Total Leave Days</label>
+              <input type="number" id="leave" required>
+            </div>
+            <div class="field">
+              <label>Additions</label>
+              <input type="number" id="add" required>
+            </div>
+            <div class="field">
+              <label>Deductions</label>
+              <input type="number" id="deduct" required>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="submit-btn">Submit Payroll</button>
+            <button type="reset" class="cancel-btn">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </main>
+ 
+
+
+  <script>
+   document.getElementById("payrollForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  // Get values from input fields using their IDs
+  const data = {
+    name: document.getElementById("name").value,
+    role: document.getElementById("role").value,
+    empid: document.getElementById("empid").value,
+    date: document.getElementById("date").value,
+    basic: document.getElementById("basic").value,
+    total: document.getElementById("total").value,
+    working: document.getElementById("working").value,
+    present: document.getElementById("present").value,
+    leave: document.getElementById("leave").value,
+    add: document.getElementById("add").value,
+    deduct: document.getElementById("deduct").value,
+  };
+
+  // Store the data in localStorage
+  localStorage.setItem("payslipData", JSON.stringify(data));
+
+  // Redirect to payslip.html
+  window.location.href = "payslip.html";
+});
+
+  </script>
+</body>
+</html>

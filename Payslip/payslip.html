@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee's Payslip</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+  display: flex;
+  margin: 0;
+  font-family: "Outfit", sans-serif;
+  background: #fffbe3;
+}
+
+.sidebar {
+  background: #455A64;
+  color: white;
+  width: 220px;
+  padding: 30px 20px;
+}
+
+.sidebar h3 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  text-align: center;
+  color: white;
+}
+
+.sidebar ul {
+  list-style: none;
+  font-size: 20px;
+  padding-left: 0;
+}
+
+.sidebar ul li {
+  padding: 15px 10px;
+  border-radius: 6px;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar ul li.active,
+.sidebar ul li:hover {
+  background-color: #546e7a;
+  color: #f8cc14;
+}
+
+.content {
+  flex: 1;
+  padding: 30px;
+  max-width: 85%;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  background: #ffe082;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  font-size: 16px;
+  
+}
+
+button.submit {
+  background: #f4c301;
+  color: #000;
+  width: 150px;
+}
+
+button.download {
+  background: #37474f;
+  color: white;
+  width: 150px;
+}
+
+/* Hover effects */
+button:hover {
+  opacity: 0.9;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #999;
+  text-align: center;
+}
+
+th {
+  background: #f4c301;
+}
+
+.payslip .info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  background: #fff8d5;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* ✅ Responsive Media Queries */
+
+@media (max-width: 1024px) {
+  .buttons {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 20px 10px;
+  }
+
+  .sidebar ul {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .sidebar ul li {
+    margin: 0;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar h3 {
+    font-size: 22px;
+  }
+
+  .sidebar ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sidebar ul li {
+    width: 100%;
+    text-align: center;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+
+</style>
+<body>
+  <aside class="sidebar">
+      
+      <ul>
+        <li><a href="overview.html"><img src="images/Overview.png"> Overview</a></li>
+        <li><a href="payroll.html"><img src="images/Payroll.png">  Payroll</a></li>
+        <li class="active"><a href="payslip.html"><img src="images/Payroll.png">  Payslip</a></li>
+      </ul>
+    </aside>
+
+  <main class="content" id="payslipContent">
+    <h2>Payslip Details</h2>
+    <div class="payslip">
+      <div class="info">
+        <p><strong>Employee Name:</strong> <span id="p_name"></span></p>
+        <p><strong>Employee ID:</strong> <span id="p_empid"></span></p>
+        <p><strong>Role:</strong> <span id="p_role"></span></p>
+        <p><strong>Date:</strong> <span id="p_date"></span></p>
+        <p><strong>Month:</strong> <span id="p_month"></span></p>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th colspan="2">Employee Details</th>
+            <th colspan="2">Earnings</th>
+            <th>Additions</th>
+            <th>Deductions</th>
+          </tr>
+          <tr>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Basic Salary</th>
+            <th>Total Salary</th>
+            <th>Add</th>
+            <th>Deduct</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="d_id"></td>
+            <td id="d_name"></td>
+            <td id="d_basic"></td>
+            <td id="d_total"></td>
+            <td id="d_add"></td>
+            <td id="d_deduct"></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Total Earnings: ₹ <span id="totalEarning"></span></h3>
+      <div class="buttons">
+  <button class="submit" onclick="save()">Save</button>
+  <button class="download" onclick="downloadPDF()">Download</button>
+</div>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+  const data = JSON.parse(localStorage.getItem("payslipData") || "{}");
+
+  document.getElementById("p_name").textContent = data.name || "Name not found";
+  document.getElementById("p_empid").textContent = data.empid || "";
+  document.getElementById("p_role").textContent = data.role || "";
+  document.getElementById("p_date").textContent = data.date || "";
+  document.getElementById("p_month").textContent = data.date
+    ? new Date(data.date).toLocaleString('default', { month: 'long' })
+    : "";
+
+  document.getElementById("d_id").textContent = data.empid || "";
+  document.getElementById("d_name").textContent = data.name || "";
+  document.getElementById("d_basic").textContent = data.basic || "";
+  document.getElementById("d_total").textContent = data.total || "";
+  document.getElementById("d_add").textContent = data.add || "";
+  document.getElementById("d_deduct").textContent = data.deduct || "";
+
+  // ✅ Make totalEarnings globally accessible
+  let totalEarnings = 0;
+  if (data.total && data.add && data.deduct) {
+    totalEarnings =
+      parseFloat(data.total) + parseFloat(data.add) - parseFloat(data.deduct);
+    document.getElementById("totalEarning").textContent = totalEarnings.toLocaleString();
+  }
+
+  function save() {
+    alert("Payslip saved successfully!");
+  }
+
+  function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.text("Payslip Details", 20, 20);
+    doc.text(`Name: ${data.name}`, 20, 30);
+    doc.text(`Role: ${data.role}`, 20, 40);
+    doc.text(`Emp ID: ${data.empid}`, 20, 50);
+    doc.text(`Date: ${data.date}`, 20, 60);
+    doc.text(`Month: ${new Date(data.date).toLocaleString('default', { month: 'long' })}`, 20, 70);
+    doc.text(`Basic: ₹${data.basic}`, 20, 80);
+    doc.text(`Total: ₹${data.total}`, 20, 90);
+    doc.text(`Additions: ₹${data.add}`, 20, 100);
+    doc.text(`Deductions: ₹${data.deduct}`, 20, 110);
+    doc.text(`Net Earnings: ₹${totalEarnings}`, 20, 120);
+    doc.save(`${data.name}_Payslip.pdf`);
+  }
+</script>
+
+</body>
+</html>
